@@ -32,8 +32,9 @@
 ## 📐 System Architecture
 
 ![System Flow](flowchart-fun.jpg) <!-- replace with actual image link from GitHub or Imgur -->
-![System Flow](systemarc.png)
----
+
+![System Architecture](systemarc.png)
+
 
 ## 📸 UI Screenshots
 
@@ -67,14 +68,29 @@
 |![Admin](AdminCheckOutCheckInPage.png)|
 ---
 
-## 🔧 How to Run Locally
+## 🧪 How to Run Locally
 
-```bash
-# Backend
-1. Open the solution in Visual Studio
-2. Run the ASP.NET Core Web API project
-3. Connect to local SQL Server (or modify connection string)
+### 🔹 Backend (ASP.NET Core)
 
-# Frontend
-1. Open the HTML folder in VS Code
-2. Launch using Live Server or any local server
+1. Open the `.sln` solution file in **Visual Studio**
+2. Restore NuGet packages
+3. Update the connection string in `appsettings.json`
+4. Run the project — Swagger UI should open
+5. Use **Postman** to test APIs (optional)
+
+### 🔹 Frontend (HTML/CSS/JS)
+
+1. Open the `frontend/` folder in **VS Code**
+2. Right-click `index.html` and choose **“Open with Live Server”**
+3. Browse the Student or Admin dashboard pages
+
+
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Status](https://img.shields.io/badge/project-live-green)
+![Made With](https://img.shields.io/badge/made%20with-HTML%2C%20CSS%2C%20JS-blue)
+
+
+## 🧾 Project Overview
+
+This project digitizes and automates the book issue/return process in academic libraries using RFID technology. It features two distinct dashboards — one for students to search and borrow books, and one for admins to manage the library, inventory, and user activity.
