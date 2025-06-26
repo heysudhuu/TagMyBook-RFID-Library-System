@@ -32,7 +32,7 @@
 ## 📐 System Architecture
 
 ![System Flow](flowchart-fun.jpg) <!-- replace with actual image link from GitHub or Imgur -->
-
+![System Flow](ChatGPT Image Jun 26, 2025, 08_11_32 AM.png)
 ---
 
 ## 📸 UI Screenshots
