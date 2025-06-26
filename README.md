@@ -31,7 +31,7 @@
 
 ## 📐 System Architecture
 
-![System Flow](https://yourimagehost.com/flowchart-fun.jpg) <!-- replace with actual image link from GitHub or Imgur -->
+![System Flow](flowchart-fun.jpg) <!-- replace with actual image link from GitHub or Imgur -->
 
 ---
 
