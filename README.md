@@ -37,13 +37,23 @@
 
 ## 📸 UI Screenshots
 
-| Welcome Page | Register Page | Login Page |
+| Welcome Page |
 |--------------|---------------|-------------|
-| ![welcome](WelcomePage.png) | ![register](registerpage.png) | ![login](loginpage.png) |
+| ![welcome](WelcomePage.png) |
 
-| Student Dashboard | Book List View | Admin Dashboard |
+ | Register Page |
+| ![register](registerpage.png) |
+
+| Login Page |
+| ![login](loginpage.png) |
+
+| Student Dashboard | 
 |-------------------|----------------|------------------|
-| ![student](Studentpage.png) | ![books](StudentQRScan.png) 
+| ![student](Studentpage.png) |
+
+| Book List View | 
+
+| ![books](StudentQRScan.png) 
 
 | Admin Dashboard |
 |![Admin](AdminPage.png)|
