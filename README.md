@@ -32,7 +32,7 @@
 ## 📐 System Architecture
 
 ![System Flow](flowchart-fun.jpg) <!-- replace with actual image link from GitHub or Imgur -->
-![System Flow]("C:\Users\Sudhanshu\Downloads\C# project\systemarc.png")
+![System Flow](systemarc.png)
 ---
 
 ## 📸 UI Screenshots
