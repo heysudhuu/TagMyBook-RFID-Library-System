@@ -47,9 +47,13 @@
 
 | Admin Dashboard |
 |![Admin](AdminPage.png)|
+| Admin Manage Book |
 |![Admin](AdminManageBook.png)|
+| Admin RFID Manager |
 |![Admin](AdminRFIDManager.png)|
+| Admin Setting |
 |![Admin](AdminSetting.png)|
+| Admin CheckOut CheckIn Page |
 |![Admin](AdminCheckOutCheckInPage.png)|
 ---
 
