@@ -1,0 +1,269 @@
+<!-- Full HTML with updated modal and history display -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Students – TagMyBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #048381;
+      --dark-bg: #1a1a2e;
+      --light-bg: #f9f9f9;
+      --card-bg: #ffffff;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-light);
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+    }
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .btn {
+      padding: 0.6rem 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #036b68; }
+    .search-box { margin: 1rem 0; }
+    .search-box input {
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+    th { background: #eee; }
+    .action-btns button {
+      margin-right: 0.5rem;
+      padding: 0.4rem 0.7rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .edit-btn { background: #ffc107; color: #000; }
+    .delete-btn { background: #dc3545; color: #fff; }
+    .history-btn { background: #007bff; color: #fff; }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 400px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .modal-content ul {
+      padding-left: 1.2rem;
+    }
+    .modal-content li {
+      margin-bottom: 0.4rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>👨‍🎓 Manage Students</h1>
+    <span class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></span>
+  </header>
+
+  <div class="container">
+    <button class="btn" onclick="openStudentModal()">+ Add Student</button>
+    <div class="search-box">
+      <input type="text" id="searchInput" onkeyup="renderStudents()" placeholder="Search by name, UID, branch or email..." />
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Branch</th>
+          <th>Phone</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="studentTableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="modal" id="studentModal">
+    <div class="modal-content">
+      <h3 id="studentModalTitle">Add Student</h3>
+      <input type="text" id="studentUID" placeholder="UID">
+      <input type="text" id="studentName" placeholder="Full Name">
+      <input type="email" id="studentEmail" placeholder="Email">
+      <input type="text" id="studentBranch" placeholder="Branch">
+      <input type="tel" id="studentPhone" placeholder="Phone Number">
+      <button class="btn" onclick="saveStudent()">Save</button>
+    </div>
+  </div>
+
+  <div class="modal" id="historyModal">
+    <div class="modal-content">
+      <h3>📖 Checkout History</h3>
+      <ul id="historyList"></ul>
+      <button class="btn" onclick="closeHistoryModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    let students = [];
+    let editingStudentIndex = null;
+
+    function loadStudents() {
+      students = [
+        { uid: 'U1001', name: 'Ronny Kumar', email: 'ronny@example.com', branch: 'CSE', phone: '9876543210', history: [
+          { book: 'Programming Book 1', date: '2024-03-12' },
+          { book: 'Networking Book 3', date: '2024-05-01' }
+        ] },
+        { uid: 'U1002', name: 'Priya Mehta', email: 'priya@example.com', branch: 'ECE', phone: '9876541230', history: [
+          { book: 'Cybersecurity Book 2', date: '2024-06-01' }
+        ] }
+      ];
+      renderStudents();
+    }
+
+    function renderStudents() {
+      const tbody = document.getElementById("studentTableBody");
+      const filter = document.getElementById("searchInput").value.toLowerCase();
+      tbody.innerHTML = "";
+      students.filter(student => (
+        student.name.toLowerCase().includes(filter) ||
+        student.uid.toLowerCase().includes(filter) ||
+        student.email.toLowerCase().includes(filter) ||
+        student.branch.toLowerCase().includes(filter)
+      )).forEach((student, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${student.uid}</td>
+          <td>${student.name}</td>
+          <td>${student.email}</td>
+          <td>${student.branch}</td>
+          <td>${student.phone}</td>
+          <td class="action-btns">
+            <button class="edit-btn" onclick="editStudent(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteStudent(${index})">Delete</button>
+            <button class="history-btn" onclick="showHistory(${index})">History</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openStudentModal() {
+      document.getElementById("studentModalTitle").textContent = "Add Student";
+      document.getElementById("studentUID").value = "";
+      document.getElementById("studentName").value = "";
+      document.getElementById("studentEmail").value = "";
+      document.getElementById("studentBranch").value = "";
+      document.getElementById("studentPhone").value = "";
+      editingStudentIndex = null;
+      document.getElementById("studentModal").style.display = "flex";
+    }
+
+    function editStudent(index) {
+      const student = students[index];
+      document.getElementById("studentModalTitle").textContent = "Edit Student";
+      document.getElementById("studentUID").value = student.uid;
+      document.getElementById("studentName").value = student.name;
+      document.getElementById("studentEmail").value = student.email;
+      document.getElementById("studentBranch").value = student.branch;
+      document.getElementById("studentPhone").value = student.phone;
+      editingStudentIndex = index;
+      document.getElementById("studentModal").style.display = "flex";
+    }
+
+    function deleteStudent(index) {
+      if (confirm("Are you sure you want to delete this student?")) {
+        students.splice(index, 1);
+        renderStudents();
+      }
+    }
+
+    function saveStudent() {
+      const student = {
+        uid: document.getElementById("studentUID").value,
+        name: document.getElementById("studentName").value,
+        email: document.getElementById("studentEmail").value,
+        branch: document.getElementById("studentBranch").value,
+        phone: document.getElementById("studentPhone").value,
+        history: []
+      };
+      if (editingStudentIndex !== null) {
+        students[editingStudentIndex] = student;
+      } else {
+        students.push(student);
+      }
+      document.getElementById("studentModal").style.display = "none";
+      renderStudents();
+    }
+
+    function showHistory(index) {
+      const list = document.getElementById("historyList");
+      const history = students[index].history || [];
+      list.innerHTML = history.length
+        ? history.map(entry => `<li>${entry.book} – <em>${entry.date}</em></li>`).join('')
+        : '<li>No history found.</li>';
+      document.getElementById("historyModal").style.display = "flex";
+    }
+
+    function closeHistoryModal() {
+      document.getElementById("historyModal").style.display = "none";
+    }
+
+    window.onload = loadStudents;
+  </script>
+</body>
+</html>

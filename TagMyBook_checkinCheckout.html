@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RFID Check-in/Checkout – TagMyBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #048381;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    .rfid-box, .manual-box {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+    }
+    .rfid-box input, .manual-box input, .manual-box select {
+      padding: 1rem;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+    .manual-box button {
+      background: #048381;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .log-table {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #f0f0f0;
+    }
+    .status-checkin { color: green; }
+    .status-checkout { color: blue; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📡 RFID Check-in/Checkout</h1>
+    <span><i class="fas fa-sync-alt"></i></span>
+  </header>
+
+  <div class="container">
+    <div class="rfid-box">
+      <h2>Scan Book Tag</h2>
+      <input type="text" id="rfidInput" placeholder="Scan or enter RFID tag ID..." onkeydown="handleScan(event)" />
+    </div>
+
+    <div class="manual-box">
+      <h2>Manual Checkout</h2>
+      <select id="studentSelect">
+        <option value="">Select Student</option>
+      </select>
+      <input type="text" id="manualBookId" placeholder="Enter Book ID" />
+      <select id="actionSelect">
+        <option value="Check-out">Check-out</option>
+        <option value="Check-in">Check-in</option>
+      </select>
+      <button onclick="manualCheckinCheckout()">Submit</button>
+    </div>
+
+    <div class="log-table">
+      <h2>Recent Activity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Book ID</th>
+            <th>Student UID</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="logTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const students = [
+      { uid: 'U1001', name: 'Ronny Kumar', history: [] },
+      { uid: 'U1002', name: 'Priya Mehta', history: [] }
+    ];
+
+    const logTableBody = document.getElementById('logTableBody');
+    const studentSelect = document.getElementById('studentSelect');
+
+    function populateStudents() {
+      students.forEach(student => {
+        const option = document.createElement('option');
+        option.value = student.uid;
+        option.textContent = `${student.uid} – ${student.name}`;
+        studentSelect.appendChild(option);
+      });
+    }
+
+    function handleScan(e) {
+      if (e.key === 'Enter') {
+        const tag = e.target.value.trim();
+        if (!tag) return;
+        const uid = students[Math.floor(Math.random() * students.length)].uid;
+        const action = Math.random() > 0.5 ? 'Check-in' : 'Check-out';
+        recordLog(tag, uid, action);
+        e.target.value = '';
+      }
+    }
+
+    function manualCheckinCheckout() {
+      const bookId = document.getElementById('manualBookId').value.trim();
+      const uid = studentSelect.value;
+      const action = document.getElementById('actionSelect').value;
+
+      if (!bookId || !uid) {
+        alert('Please fill all fields');
+        return;
+      }
+
+      recordLog(bookId, uid, action);
+      document.getElementById('manualBookId').value = '';
+      studentSelect.value = '';
+    }
+
+    function recordLog(bookId, uid, action) {
+      const time = new Date().toLocaleString();
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${time}</td>
+        <td>${bookId}</td>
+        <td>${uid}</td>
+        <td class="status-${action.toLowerCase()}">${action}</td>
+      `;
+      logTableBody.prepend(row);
+
+      // Update student history
+      const student = students.find(s => s.uid === uid);
+      if (student && action === 'Check-out') {
+        student.history.push({ book: bookId, date: new Date().toISOString().split('T')[0] });
+        console.log(`${student.name} checked out ${bookId}`);
+      }
+    }
+
+    window.onload = populateStudents;
+  </script>
+</body>
+</html>

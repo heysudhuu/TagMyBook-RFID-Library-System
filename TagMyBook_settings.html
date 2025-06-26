@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings – TagMyBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark {
+      background: #1a1a2e;
+      color: #eee;
+    }
+    header {
+      background: #048381;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    body.dark .container {
+      background: #2e2e42;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.4rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .btn {
+      background: #048381;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      margin-top: 2rem;
+      margin-right: 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      background: #036b68;
+    }
+    .status {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      margin-top: 1rem;
+      border-radius: 6px;
+      padding: 0.6rem;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⚙️ Settings – TagMyBook</h1>
+    <span><i class="fas fa-cog"></i></span>
+  </header>
+
+  <div class="container">
+    <h2>Library Settings</h2>
+    <form id="settingsForm">
+      <label for="libraryName">Library Name</label>
+      <input type="text" id="libraryName" />
+
+      <label for="checkoutDuration">Default Checkout Duration (days)</label>
+      <input type="number" id="checkoutDuration" min="1" />
+
+      <label for="finePerDay">Fine per Day (₹)</label>
+      <input type="number" id="finePerDay" min="0" />
+
+      <label for="openTime">Library Open Time</label>
+      <input type="time" id="openTime" />
+
+      <label for="closeTime">Library Close Time</label>
+      <input type="time" id="closeTime" />
+
+      <label for="theme">Theme Mode</label>
+      <select id="theme" onchange="applyTheme()">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+
+      <div style="margin-top: 2rem;">
+        <button type="button" class="btn" onclick="saveSettings()">Save Settings</button>
+        <button type="button" class="btn" onclick="exportSettings()">Export</button>
+        <button type="button" class="btn" onclick="importSettings()">Import</button>
+      </div>
+    </form>
+
+    <textarea id="settingsText" placeholder="Paste exported JSON here to import..."></textarea>
+    <div class="status" id="saveStatus"></div>
+  </div>
+
+  <script>
+    function saveSettings() {
+      const settings = {
+        libraryName: document.getElementById('libraryName').value,
+        checkoutDuration: document.getElementById('checkoutDuration').value,
+        finePerDay: document.getElementById('finePerDay').value,
+        openTime: document.getElementById('openTime').value,
+        closeTime: document.getElementById('closeTime').value,
+        theme: document.getElementById('theme').value
+      };
+      localStorage.setItem('tagMyBookSettings', JSON.stringify(settings));
+      applyTheme();
+      document.getElementById('saveStatus').textContent = '✅ Settings saved successfully!';
+    }
+
+    function loadSettings() {
+      const saved = JSON.parse(localStorage.getItem('tagMyBookSettings'));
+      if (saved) {
+        document.getElementById('libraryName').value = saved.libraryName;
+        document.getElementById('checkoutDuration').value = saved.checkoutDuration;
+        document.getElementById('finePerDay').value = saved.finePerDay;
+        document.getElementById('openTime').value = saved.openTime;
+        document.getElementById('closeTime').value = saved.closeTime;
+        document.getElementById('theme').value = saved.theme;
+        applyTheme();
+      }
+    }
+
+    function applyTheme() {
+      const theme = document.getElementById('theme').value;
+      document.body.className = theme === 'dark' ? 'dark' : '';
+    }
+
+    function exportSettings() {
+      const settings = localStorage.getItem('tagMyBookSettings') || '{}';
+      document.getElementById('settingsText').value = settings;
+      document.getElementById('saveStatus').textContent = '📤 Settings exported to text area.';
+    }
+
+    function importSettings() {
+      try {
+        const json = document.getElementById('settingsText').value.trim();
+        const data = JSON.parse(json);
+        localStorage.setItem('tagMyBookSettings', JSON.stringify(data));
+        loadSettings();
+        document.getElementById('saveStatus').textContent = '📥 Settings imported and applied.';
+      } catch (e) {
+        document.getElementById('saveStatus').textContent = '❌ Invalid JSON format.';
+      }
+    }
+
+    window.onload = loadSettings;
+  </script>
+</body>
+</html>

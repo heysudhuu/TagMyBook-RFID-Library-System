@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Books – TagMyBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #048381;
+      --dark-bg: #1a1a2e;
+      --light-bg: #f9f9f9;
+      --card-bg: #ffffff;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-light);
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+    }
+
+    header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #036b68;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    .action-btns button {
+      margin-right: 0.5rem;
+      padding: 0.4rem 0.7rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .edit-btn { background: #ffc107; color: #000; }
+    .delete-btn { background: #dc3545; color: #fff; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 400px;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 Manage Books</h1>
+    <span class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></span>
+  </header>
+
+  <div class="container">
+    <button class="btn" onclick="openBookModal()">+ Add New Book</button>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Price (PDF)</th>
+          <th>Price (Print)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="bookTableBody">
+        <!-- Rows will be added here by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal" id="bookModal">
+    <div class="modal-content">
+      <h3 id="modalTitle">Add Book</h3>
+      <input type="text" id="bookId" placeholder="Book ID">
+      <input type="text" id="bookTitle" placeholder="Title">
+      <input type="text" id="bookAuthor" placeholder="Author">
+      <input type="text" id="bookCategory" placeholder="Category">
+      <input type="number" id="bookPdfPrice" placeholder="Price (PDF)">
+      <input type="number" id="bookPrintPrice" placeholder="Price (Print)">
+      <button class="btn" onclick="saveBook()">Save</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    let books = [];
+    let editingIndex = null;
+
+    function loadBooks() {
+      fetch('books.json')
+        .then(response => response.json())
+        .then(data => {
+          books = data;
+          renderBooks();
+        });
+    }
+
+    function renderBooks() {
+      const tbody = document.getElementById("bookTableBody");
+      tbody.innerHTML = "";
+      books.forEach((book, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${book.id}</td>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.category}</td>
+          <td>₹${book.price_pdf}</td>
+          <td>₹${book.price_print}</td>
+          <td class="action-btns">
+            <button class="edit-btn" onclick="editBook(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteBook(${index})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openBookModal() {
+      document.getElementById("modalTitle").textContent = "Add Book";
+      document.getElementById("bookId").value = "";
+      document.getElementById("bookTitle").value = "";
+      document.getElementById("bookAuthor").value = "";
+      document.getElementById("bookCategory").value = "";
+      document.getElementById("bookPdfPrice").value = "";
+      document.getElementById("bookPrintPrice").value = "";
+      editingIndex = null;
+      document.getElementById("bookModal").style.display = "flex";
+    }
+
+    function editBook(index) {
+      const book = books[index];
+      document.getElementById("modalTitle").textContent = "Edit Book";
+      document.getElementById("bookId").value = book.id;
+      document.getElementById("bookTitle").value = book.title;
+      document.getElementById("bookAuthor").value = book.author;
+      document.getElementById("bookCategory").value = book.category;
+      document.getElementById("bookPdfPrice").value = book.price_pdf;
+      document.getElementById("bookPrintPrice").value = book.price_print;
+      editingIndex = index;
+      document.getElementById("bookModal").style.display = "flex";
+    }
+
+    function deleteBook(index) {
+      if (confirm("Are you sure to delete this book?")) {
+        books.splice(index, 1);
+        renderBooks();
+      }
+    }
+
+    function saveBook() {
+      const book = {
+        id: document.getElementById("bookId").value,
+        title: document.getElementById("bookTitle").value,
+        author: document.getElementById("bookAuthor").value,
+        category: document.getElementById("bookCategory").value,
+        price_pdf: parseFloat(document.getElementById("bookPdfPrice").value),
+        price_print: parseFloat(document.getElementById("bookPrintPrice").value),
+      };
+
+      if (editingIndex !== null) {
+        books[editingIndex] = book;
+      } else {
+        books.push(book);
+      }
+
+      document.getElementById("bookModal").style.display = "none";
+      renderBooks();
+    }
+
+    window.onload = loadBooks;
+  </script>
+</body>
+</html>

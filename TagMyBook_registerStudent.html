@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register – TagMyBook</title>
+  <link rel="icon" href="TagMyBook.webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.0/tsparticles.bundle.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    :root {
+      --primary: #048381;
+      --dark-bg: #1a1a2e;
+      --light-bg: #ffffff;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    body.dark-mode {
+      background: var(--dark-bg);
+      color: var(--text-dark);
+    }
+
+    #tsparticles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 2;
+      color: #666;
+    }
+
+    body.dark-mode .theme-toggle {
+      color: #ccc;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease;
+    }
+
+    body.dark-mode .card {
+      background: #2e2e42;
+      color: #eee;
+    }
+
+    h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .floating-group {
+      position: relative;
+    }
+
+    .floating-group input {
+      width: 100%;
+      padding: 1rem 1rem 0.75rem;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background: transparent;
+      transition: 0.3s ease;
+      color: inherit;
+    }
+
+    .floating-group input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(4, 131, 129, 0.2);
+    }
+
+    .floating-group input.error {
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+    }
+
+    .floating-group label {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: #888;
+      pointer-events: none;
+      background: inherit;
+      padding: 0 0.25rem;
+      transition: all 0.3s ease;
+    }
+
+    .floating-group input:focus + label,
+    .floating-group input:not(:placeholder-shown) + label,
+    .floating-group input:valid + label {
+      top: 0.2rem;
+      font-size: 0.75rem;
+      color: var(--primary);
+    }
+
+    .error-msg {
+      font-size: 0.8rem;
+      color: #ef4444;
+      margin-top: 0.25rem;
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: white;
+      padding: 0.85rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .primary-btn:hover {
+      background: #036b68;
+    }
+
+    .muted {
+      text-align: center;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+
+    .muted a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .success-container {
+      text-align: center;
+      animation: fadeInUp 1s ease;
+    }
+
+    .success-container h2 {
+      color: var(--primary);
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="tsparticles"></div>
+  <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
+
+  <div class="card" id="registerCard">
+    <h2>Register to TagMyBook</h2>
+    <form id="registerForm" novalidate>
+      <div class="floating-group">
+        <input type="text" id="firstName" required placeholder=" " />
+        <label for="firstName">First Name</label>
+        <div class="error-msg" id="error-firstName"></div>
+      </div>
+      <div class="floating-group">
+        <input type="text" id="lastName" required placeholder=" " />
+        <label for="lastName">Last Name</label>
+        <div class="error-msg" id="error-lastName"></div>
+      </div>
+      <div class="floating-group">
+        <input type="email" id="email" required placeholder=" " />
+        <label for="email">Email</label>
+        <div class="error-msg" id="error-email"></div>
+      </div>
+      <div class="floating-group">
+        <input type="text" id="uid" required placeholder=" " />
+        <label for="uid">UID</label>
+        <div class="error-msg" id="error-uid"></div>
+      </div>
+      <div class="floating-group">
+        <input type="tel" id="phone" required placeholder=" " />
+        <label for="phone">Phone Number</label>
+        <div class="error-msg" id="error-phone"></div>
+      </div>
+      <div class="floating-group">
+        <input type="text" id="branch" required placeholder=" " />
+        <label for="branch">Branch</label>
+        <div class="error-msg" id="error-branch"></div>
+      </div>
+      <div class="floating-group">
+        <input type="password" id="regPassword" required placeholder=" " />
+        <label for="regPassword">Password</label>
+        <div class="error-msg" id="error-regPassword"></div>
+      </div>
+
+      <button type="submit" class="primary-btn">Register</button>
+    </form>
+    <p class="muted">Already have an account? <a href="TagMyBook_indexloginBoth.html">Login</a></p>
+  </div>
+
+  <script>
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const fields = ["firstName", "lastName", "email", "uid", "phone", "branch", "regPassword"];
+      let valid = true;
+      const formData = {};
+
+      fields.forEach(id => {
+        const input = document.getElementById(id);
+        const error = document.getElementById("error-" + id);
+        const labelText = document.querySelector(`label[for="${id}"]`)?.textContent || id;
+
+        if (!input.value.trim()) {
+          error.textContent = `${labelText} is required.`;
+          input.classList.add("error");
+          valid = false;
+        } else {
+          error.textContent = "";
+          input.classList.remove("error");
+          formData[id] = input.value.trim();
+        }
+      });
+
+      if (!valid) return;
+
+      localStorage.setItem("studentData", JSON.stringify(formData));
+
+      // Show animated success screen
+      const card = document.getElementById("registerCard");
+      card.innerHTML = `
+        <div class="success-container">
+          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" style="width: 200px; height: 200px; margin: 0 auto;" autoplay></lottie-player>
+          <h2>Registration Successful!</h2>
+          <p>You may now <a href="TagMyBook_indexloginBoth.html">login</a> to your account.</p>
+        </div>
+      `;
+    });
+
+    // tsParticles background
+    tsParticles.load("tsparticles", {
+      background: { color: { value: "transparent" } },
+      particles: {
+        number: { value: 60 },
+        color: { value: ["#048381", "#32e0c4", "#f5f5f5"] },
+        shape: { type: ["circle", "triangle", "square"] },
+        opacity: { value: 0.3 },
+        size: { value: 4, random: true },
+        move: { enable: true, speed: 1.5, outModes: "bounce" }
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "repulse" },
+          onClick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 80 },
+          push: { quantity: 4 }
+        }
+      },
+      fullScreen: { enable: false }
+    });
+  </script>
+</body>
+</html>

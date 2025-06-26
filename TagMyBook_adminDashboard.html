@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – TagMyBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #048381;
+      --accent: #00bfa6;
+      --dark-bg: #1a1a2e;
+      --light-bg: #f9f9f9;
+      --card-bg: #ffffff;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+      display: flex;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+    }
+
+    nav {
+      width: 250px;
+      background-color: var(--primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    nav.collapsed {
+      transform: translateX(-100%);
+    }
+
+    nav h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: var(--accent);
+      color: white;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        z-index: 999;
+        left: 0;
+        top: 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      body {
+        flex-direction: column;
+      }
+
+      .main {
+        padding-top: 4rem;
+      }
+    }
+
+    .main {
+      flex: 1;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(4, 131, 129, 0.15);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-card h2 {
+      font-size: 2.2rem;
+      margin-bottom: 0.3rem;
+      color: var(--primary);
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+      transition: background 0.3s;
+    }
+
+    body.dark-mode .card,
+    body.dark-mode .stat-card {
+      background: #2e2e42;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: var(--primary);
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    p {
+      color: #555;
+      line-height: 1.5;
+    }
+
+    body.dark-mode p {
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <span class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></span>
+  <div class="hamburger" id="hamburger" aria-label="Open sidebar"><i class="fas fa-bars"></i></div>
+
+  <nav id="sidebar">
+    <h1>📚 TagMyBook Admin</h1>
+    <a href="TagMyBook_manageBooks.html">📘 Manage Books</a>
+    <a href="TagMyBook_manageStudents.html">👨‍🎓 Manage Students</a>
+    <a href="TagMyBook_checkinCheckout.html">📖 Checkin/Checkout</a>
+    <a href="TagMyBook_rfidDeviceManager.html">🔌 RFID Devices</a>
+    <a href="TagMyBook_settings.html">⚙️ Settings</a>
+  </nav>
+
+  <main class="main">
+    <section class="dashboard-grid" id="overview">
+      <div id="statsLoading" style="grid-column: 1/-1; text-align:center;">
+        <i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#048381;"></i>
+      </div>
+      <div class="stat-card">
+        <h2 class="count" data-count="1200">0</h2>
+        <p>Total Books</p>
+      </div>
+      <div class="stat-card">
+        <h2 class="count" data-count="350">0</h2>
+        <p>Registered Students</p>
+      </div>
+      <div class="stat-card">
+        <h2 class="count" data-count="42">0</h2>
+        <p>Books Checked Out Today</p>
+      </div>
+      <div class="stat-card">
+        <h2 class="count" data-count="15">0</h2>
+        <p>Overdue Returns</p>
+      </div>
+    </section>
+
+    <div class="card" id="rfid">
+      <h3>📡 RFID Scan Monitor</h3>
+      <p>Display real-time scan activity here (live feed from RFID reader).</p>
+    </div>
+
+    <div class="card" id="books">
+      <h3>📚 Book Management</h3>
+      <p>List of books with edit/delete/add features and assign RFID tags.</p>
+    </div>
+
+    <div class="card" id="students">
+      <h3>👨‍🎓 Student Management</h3>
+      <p>Manage student details, borrowing history, and account status.</p>
+    </div>
+
+    <div class="card" id="logs">
+      <h3>📝 Checkout Logs</h3>
+      <p>Table of book check-ins/outs with export options.</p>
+    </div>
+
+    <div class="card" id="devices">
+      <h3>🔌 RFID Devices</h3>
+      <p>Show registered RFID devices and their online status.</p>
+    </div>
+
+    <div class="card" id="settings">
+      <h3>⚙️ Settings</h3>
+      <p>Library configuration, fine rates, return periods, etc.</p>
+    </div>
+  </main>
+
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const icon = themeToggle.querySelector("i");
+
+    // On load, set dark mode from localStorage
+    if (localStorage.getItem("adminDarkMode") === "true") {
+      document.body.classList.add("dark-mode");
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      icon.classList.toggle("fa-sun");
+      icon.classList.toggle("fa-moon");
+      localStorage.setItem("adminDarkMode", document.body.classList.contains("dark-mode"));
+    });
+
+    const hamburger = document.getElementById("hamburger");
+    const sidebar = document.getElementById("sidebar");
+
+    hamburger.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+    });
+
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+        sidebar.classList.add('collapsed');
+      }
+    });
+
+    const counters = document.querySelectorAll('.count');
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-count');
+        const current = +counter.innerText;
+        const increment = Math.max(1, Math.floor((target - current) / 10));
+
+        if (current < target) {
+          counter.innerText = current + increment;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+
+    // Hide spinner after counters animate
+    setTimeout(() => {
+      document.getElementById('statsLoading').style.display = 'none';
+    }, 1200);
+
+    document.querySelectorAll('nav a').forEach(link => {
+      if (window.location.href.includes(link.getAttribute('href'))) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard – TagMyBook</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- QRCode.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- FullCalendar JS -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <style>
+    :root {
+      --primary: #048381;
+      --dark-bg: #1a1a2e;
+      --light-bg: #f4f4f4;
+      --card-light: #fff;
+      --card-dark: #2c2c3e;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-light);
+      transition: background 0.4s, color 0.4s;
+    }
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--text-dark);
+    }
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu-icon {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    nav {
+      background: var(--primary);
+      padding: 0.5rem 2rem;
+      display: none;
+      flex-direction: column;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 0;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .card {
+      background: var(--card-light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      transition: background 0.4s;
+    }
+    body.dark-mode .card {
+      background: var(--card-dark);
+    }
+    .book-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .book-card {
+      width: 240px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+    body.dark-mode .book-card {
+      background: var(--card-dark);
+    }
+    .book-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .book-card h4 {
+      margin: 0.5rem 0 0.2rem;
+    }
+    .book-card button {
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 0.5rem;
+      width: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .filter-tabs button {
+      margin: 0 0.5rem 1rem 0;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .filter-tabs button.active {
+      background: var(--primary);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <span class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></span>
+  <strong>TagMyBook – Student Dashboard</strong>
+  <span class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></span>
+</header>
+<nav id="menu">
+  <a href="#borrowed">Borrowed Books</a>
+  <a href="#bookStore">Reserve Books</a>
+  <a href="#profile">Student Profile</a>
+  <a href="#calendar">Return Calendar</a>
+  <a href="#">Help</a>
+</nav>
+
+<div class="container">
+  <div class="card" id="profile">
+    <h3>Student Profile</h3>
+    <form id="profileForm">
+      <p><strong>Name:</strong> <input type="text" id="profileName" value="Sudhanshu Yaduvanshi"></p>
+      <p><strong>UID:</strong> <input type="text" id="profileUID" value="22CY0001" readonly></p>
+      <p><strong>Email:</strong> <input type="email" id="profileEmail" value="sudhanshu@example.com"></p>
+      <p><strong>Branch:</strong> <input type="text" id="profileBranch" value="Cybersecurity"></p>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+
+  <div class="card" id="borrowed">
+    <h3>Borrowed Books</h3>
+    <div id="borrowedBooksList"></div>
+  </div>
+
+  <div class="card" id="calendar">
+    <h3>Return Due Calendar</h3>
+    <div id="calendarView"></div>
+  </div>
+
+  <div class="card">
+    <h3>Buy Books – Soft or Hard Copy</h3>
+    <div class="filter-tabs" id="filterTabs"></div>
+    <div id="bookStore" class="book-list"></div>
+  </div>
+</div>
+
+<script>
+  let borrowedBooks = [
+    {
+      title: "Clean Code",
+      author: "Robert C. Martin",
+      dueDate: "2025-07-10",
+      cover: "https://covers.openlibrary.org/b/id/10523338-L.jpg",
+      id: "BK001"
+    },
+    {
+      title: "The Pragmatic Programmer",
+      author: "Andrew Hunt",
+      dueDate: "2025-07-15",
+      cover: "https://covers.openlibrary.org/b/id/8226191-L.jpg",
+      id: "BK002"
+    }
+  ];
+
+  // On load, set dark mode from localStorage
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
+  const themeToggle = document.getElementById("themeToggle");
+  themeToggle.onclick = () => {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+  };
+
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+  }
+
+  const categories = new Set();
+  let allBooks = [];
+
+  async function loadBooks() {
+    const container = document.getElementById("bookStore");
+    container.innerHTML = "Loading...";
+    try {
+      const response = await fetch("books.json");
+      allBooks = await response.json();
+      allBooks.forEach(book => categories.add(book.category));
+      renderTabs();
+      filterBooks("All");
+    } catch (e) {
+      container.innerHTML = "Failed to load books.";
+    }
+  }
+
+  function renderTabs() {
+    const tabContainer = document.getElementById("filterTabs");
+    tabContainer.innerHTML = '<button class="active" onclick="filterBooks(\"All\", this)">All</button>';
+    [...categories].forEach(cat => {
+      const btn = document.createElement("button");
+      btn.textContent = cat;
+      btn.onclick = () => filterBooks(cat, btn);
+      tabContainer.appendChild(btn);
+    });
+  }
+
+  function filterBooks(category, clicked) {
+    const buttons = document.querySelectorAll(".filter-tabs button");
+    buttons.forEach(b => b.classList.remove("active"));
+    if (clicked) clicked.classList.add("active");
+
+    const filtered = category === "All" ? allBooks : allBooks.filter(b => b.category === category);
+    const container = document.getElementById("bookStore");
+    container.innerHTML = "";
+
+    filtered.forEach(book => {
+      const div = document.createElement("div");
+      div.className = "book-card";
+      div.innerHTML = `
+        <img src="${book.cover}" alt="Cover">
+        <h4>${book.title}</h4>
+        <p>Author: ${book.author}</p>
+        <p>PDF: ₹${book.price_pdf} <br>Print: ₹${book.price_print}</p>
+        <button onclick="buyBook('${book.title}', ${book.price_pdf}, 'pdf')">Buy PDF</button>
+        <button onclick="buyBook('${book.title}', ${book.price_print}, 'print')">Buy Hard Copy</button>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function buyBook(title, amount, type) {
+    const options = {
+      key: "rzp_test_YourKeyHere",
+      amount: amount * 100,
+      currency: "INR",
+      name: "TagMyBook",
+      description: `${type === 'pdf' ? 'Soft Copy' : 'Hard Copy'}: ${title}`,
+      handler: function (response) {
+        alert(`Payment successful! ${type === 'pdf' ? 'PDF will download' : 'Collect from library via RFID'}`);
+        if (type === "pdf") {
+          window.open("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf", "_blank");
+        }
+      },
+      theme: { color: "#048381" }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+  }
+
+  function renderBorrowedBooks() {
+    const container = document.getElementById("borrowedBooksList");
+    container.innerHTML = "";
+    borrowedBooks.forEach(book => {
+      // Calculate status
+      const today = new Date();
+      const due = new Date(book.dueDate);
+      let status = "";
+      let statusColor = "";
+      if (due < today) {
+        status = "Overdue";
+        statusColor = "red";
+      } else if ((due - today) / (1000 * 60 * 60 * 24) <= 3) {
+        status = "Due Soon";
+        statusColor = "orange";
+      } else {
+        status = "Borrowed";
+        statusColor = "green";
+      }
+      // Book card
+      const div = document.createElement("div");
+      div.style = "display:flex;align-items:center;gap:1.5rem;margin-bottom:1rem;";
+      div.innerHTML = `
+        <img src="${book.cover}" alt="Book Cover" style="width:80px;height:110px;border-radius:8px;">
+        <div>
+          <strong>Title:</strong> ${book.title}<br>
+          <strong>Author:</strong> ${book.author}<br>
+          <strong>Due Date:</strong> <span>${book.dueDate}</span>
+          <span style="margin-left:10px;padding:2px 8px;border-radius:6px;background:${statusColor};color:white;font-size:0.9em;">${status}</span>
+          <div id="qrcode-${book.id}" style="margin-top:0.5rem;"></div>
+          <button onclick="downloadQR('${book.id}')">Download QR</button>
+        </div>
+      `;
+      container.appendChild(div);
+      // Generate QR
+      setTimeout(() => {
+        new QRCode(document.getElementById(`qrcode-${book.id}`), {
+          text: `Book: ${book.title} | UID: 22CY0001 | Due: ${book.dueDate}`,
+          width: 80,
+          height: 80
+        });
+      }, 100);
+    });
+  }
+
+  // QR code for borrowed book
+  window.onload = function() {
+    renderBorrowedBooks();
+    renderCalendar();
+    showDueNotifications();
+  };
+
+  function renderCalendar() {
+    var calendarEl = document.getElementById('calendarView');
+    var events = borrowedBooks.map(book => ({
+      title: `Return: ${book.title}`,
+      start: book.dueDate,
+      color: '#048381'
+    }));
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      height: 350,
+      events: events
+    });
+    calendar.render();
+  }
+
+  loadBooks();
+
+  function downloadQR(bookId) {
+    const qrDiv = document.getElementById(`qrcode-${bookId}`).querySelector('canvas');
+    if (qrDiv) {
+      const link = document.createElement('a');
+      link.href = qrDiv.toDataURL();
+      link.download = `QR_${bookId}.png`;
+      link.click();
+    } else {
+      alert("QR code not generated yet!");
+    }
+  }
+
+  document.getElementById("profileForm").onsubmit = function(e) {
+    e.preventDefault();
+    alert("Profile saved! (Demo only)");
+  };
+
+  function showDueNotifications() {
+    const soon = borrowedBooks.filter(book => {
+      const due = new Date(book.dueDate);
+      const today = new Date();
+      return (due - today) / (1000 * 60 * 60 * 24) <= 3 && due > today;
+    });
+    if (soon.length > 0) {
+      alert("Reminder: You have books due soon!");
+    }
+  }
+
+  setInterval(showDueNotifications, 24 * 60 * 60 * 1000); // Check daily
+</script>
+</body>
+</html>

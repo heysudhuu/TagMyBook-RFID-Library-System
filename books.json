@@ -1,0 +1,902 @@
+[
+  {
+    "id": "book001",
+    "title": "Programming Book 1",
+    "author": "Jane Smith",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519863-L.jpg",
+    "price_pdf": 57,
+    "price_print": 152
+  },
+  {
+    "id": "book002",
+    "title": "Programming Book 2",
+    "author": "S. Bhatt",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519888-L.jpg",
+    "price_pdf": 68,
+    "price_print": 110
+  },
+  {
+    "id": "book003",
+    "title": "Cybersecurity Book 3",
+    "author": "Bruce Schneier",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519878-L.jpg",
+    "price_pdf": 74,
+    "price_print": 144
+  },
+  {
+    "id": "book004",
+    "title": "Programming Book 4",
+    "author": "John Doe",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519888-L.jpg",
+    "price_pdf": 74,
+    "price_print": 162
+  },
+  {
+    "id": "book005",
+    "title": "Networking Book 5",
+    "author": "S. Bhatt",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519870-L.jpg",
+    "price_pdf": 49,
+    "price_print": 179
+  },
+  {
+    "id": "book006",
+    "title": "Cybersecurity Book 6",
+    "author": "Jane Smith",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519852-L.jpg",
+    "price_pdf": 49,
+    "price_print": 160
+  },
+  {
+    "id": "book007",
+    "title": "Electronics Book 7",
+    "author": "Dr. Verma",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519855-L.jpg",
+    "price_pdf": 80,
+    "price_print": 180
+  },
+  {
+    "id": "book008",
+    "title": "Mechanical Book 8",
+    "author": "Jane Smith",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519897-L.jpg",
+    "price_pdf": 41,
+    "price_print": 101
+  },
+  {
+    "id": "book009",
+    "title": "Programming Book 9",
+    "author": "Dr. Verma",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519866-L.jpg",
+    "price_pdf": 63,
+    "price_print": 154
+  },
+  {
+    "id": "book010",
+    "title": "Electronics Book 10",
+    "author": "Dr. Verma",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519880-L.jpg",
+    "price_pdf": 52,
+    "price_print": 136
+  },
+  {
+    "id": "book011",
+    "title": "Networking Book 11",
+    "author": "Jane Smith",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519839-L.jpg",
+    "price_pdf": 51,
+    "price_print": 118
+  },
+  {
+    "id": "book012",
+    "title": "Computer Science Book 12",
+    "author": "Robert L.",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519841-L.jpg",
+    "price_pdf": 49,
+    "price_print": 132
+  },
+  {
+    "id": "book013",
+    "title": "Computer Science Book 13",
+    "author": "S. Bhatt",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519893-L.jpg",
+    "price_pdf": 66,
+    "price_print": 136
+  },
+  {
+    "id": "book014",
+    "title": "Computer Science Book 14",
+    "author": "Lisa M.",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519859-L.jpg",
+    "price_pdf": 54,
+    "price_print": 131
+  },
+  {
+    "id": "book015",
+    "title": "Networking Book 15",
+    "author": "S. Bhatt",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519890-L.jpg",
+    "price_pdf": 73,
+    "price_print": 136
+  },
+  {
+    "id": "book016",
+    "title": "Mechanical Book 16",
+    "author": "A. Kumar",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519855-L.jpg",
+    "price_pdf": 58,
+    "price_print": 175
+  },
+  {
+    "id": "book017",
+    "title": "Mechanical Book 17",
+    "author": "Dr. Verma",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519884-L.jpg",
+    "price_pdf": 45,
+    "price_print": 113
+  },
+  {
+    "id": "book018",
+    "title": "Mechanical Book 18",
+    "author": "Dr. Verma",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519866-L.jpg",
+    "price_pdf": 75,
+    "price_print": 151
+  },
+  {
+    "id": "book019",
+    "title": "Mechanical Book 19",
+    "author": "Nina Roy",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519883-L.jpg",
+    "price_pdf": 52,
+    "price_print": 122
+  },
+  {
+    "id": "book020",
+    "title": "Programming Book 20",
+    "author": "Bruce Schneier",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519879-L.jpg",
+    "price_pdf": 73,
+    "price_print": 167
+  },
+  {
+    "id": "book021",
+    "title": "Computer Science Book 21",
+    "author": "S. Bhatt",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519852-L.jpg",
+    "price_pdf": 80,
+    "price_print": 149
+  },
+  {
+    "id": "book022",
+    "title": "AI/ML Book 22",
+    "author": "Jane Smith",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519863-L.jpg",
+    "price_pdf": 60,
+    "price_print": 141
+  },
+  {
+    "id": "book023",
+    "title": "AI/ML Book 23",
+    "author": "S. Bhatt",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519888-L.jpg",
+    "price_pdf": 72,
+    "price_print": 170
+  },
+  {
+    "id": "book024",
+    "title": "Programming Book 24",
+    "author": "Andrew Ng",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519851-L.jpg",
+    "price_pdf": 46,
+    "price_print": 117
+  },
+  {
+    "id": "book025",
+    "title": "Programming Book 25",
+    "author": "Andrew Ng",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519858-L.jpg",
+    "price_pdf": 71,
+    "price_print": 127
+  },
+  {
+    "id": "book026",
+    "title": "Networking Book 26",
+    "author": "Nina Roy",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519884-L.jpg",
+    "price_pdf": 47,
+    "price_print": 140
+  },
+  {
+    "id": "book027",
+    "title": "Cybersecurity Book 27",
+    "author": "John Doe",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519848-L.jpg",
+    "price_pdf": 70,
+    "price_print": 142
+  },
+  {
+    "id": "book028",
+    "title": "Computer Science Book 28",
+    "author": "Andrew Ng",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519857-L.jpg",
+    "price_pdf": 75,
+    "price_print": 104
+  },
+  {
+    "id": "book029",
+    "title": "Cybersecurity Book 29",
+    "author": "Andrew Ng",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519871-L.jpg",
+    "price_pdf": 40,
+    "price_print": 115
+  },
+  {
+    "id": "book030",
+    "title": "Mechanical Book 30",
+    "author": "S. Bhatt",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519843-L.jpg",
+    "price_pdf": 65,
+    "price_print": 134
+  },
+  {
+    "id": "book031",
+    "title": "Networking Book 31",
+    "author": "Andrew Ng",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519885-L.jpg",
+    "price_pdf": 60,
+    "price_print": 164
+  },
+  {
+    "id": "book032",
+    "title": "Electronics Book 32",
+    "author": "Lisa M.",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519874-L.jpg",
+    "price_pdf": 47,
+    "price_print": 113
+  },
+  {
+    "id": "book033",
+    "title": "Computer Science Book 33",
+    "author": "John Doe",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519878-L.jpg",
+    "price_pdf": 67,
+    "price_print": 113
+  },
+  {
+    "id": "book034",
+    "title": "Programming Book 34",
+    "author": "Andrew Ng",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519886-L.jpg",
+    "price_pdf": 52,
+    "price_print": 103
+  },
+  {
+    "id": "book035",
+    "title": "Mechanical Book 35",
+    "author": "S. Bhatt",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519872-L.jpg",
+    "price_pdf": 78,
+    "price_print": 160
+  },
+  {
+    "id": "book036",
+    "title": "Mechanical Book 36",
+    "author": "A. Kumar",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519887-L.jpg",
+    "price_pdf": 80,
+    "price_print": 167
+  },
+  {
+    "id": "book037",
+    "title": "Cybersecurity Book 37",
+    "author": "Lisa M.",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519842-L.jpg",
+    "price_pdf": 74,
+    "price_print": 119
+  },
+  {
+    "id": "book038",
+    "title": "AI/ML Book 38",
+    "author": "A. Kumar",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519866-L.jpg",
+    "price_pdf": 47,
+    "price_print": 148
+  },
+  {
+    "id": "book039",
+    "title": "Mechanical Book 39",
+    "author": "S. Bhatt",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519877-L.jpg",
+    "price_pdf": 50,
+    "price_print": 134
+  },
+  {
+    "id": "book040",
+    "title": "Cybersecurity Book 40",
+    "author": "Lisa M.",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519859-L.jpg",
+    "price_pdf": 62,
+    "price_print": 143
+  },
+  {
+    "id": "book041",
+    "title": "Computer Science Book 41",
+    "author": "Jane Smith",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519887-L.jpg",
+    "price_pdf": 71,
+    "price_print": 114
+  },
+  {
+    "id": "book042",
+    "title": "AI/ML Book 42",
+    "author": "Nina Roy",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519883-L.jpg",
+    "price_pdf": 75,
+    "price_print": 151
+  },
+  {
+    "id": "book043",
+    "title": "Networking Book 43",
+    "author": "Jane Smith",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519873-L.jpg",
+    "price_pdf": 78,
+    "price_print": 174
+  },
+  {
+    "id": "book044",
+    "title": "Cybersecurity Book 44",
+    "author": "Lisa M.",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519877-L.jpg",
+    "price_pdf": 63,
+    "price_print": 159
+  },
+  {
+    "id": "book045",
+    "title": "Electronics Book 45",
+    "author": "Bruce Schneier",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519886-L.jpg",
+    "price_pdf": 78,
+    "price_print": 180
+  },
+  {
+    "id": "book046",
+    "title": "Networking Book 46",
+    "author": "Nina Roy",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519870-L.jpg",
+    "price_pdf": 72,
+    "price_print": 137
+  },
+  {
+    "id": "book047",
+    "title": "Programming Book 47",
+    "author": "Nina Roy",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519893-L.jpg",
+    "price_pdf": 51,
+    "price_print": 120
+  },
+  {
+    "id": "book048",
+    "title": "Electronics Book 48",
+    "author": "A. Kumar",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519877-L.jpg",
+    "price_pdf": 64,
+    "price_print": 113
+  },
+  {
+    "id": "book049",
+    "title": "Programming Book 49",
+    "author": "Dr. Verma",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519883-L.jpg",
+    "price_pdf": 66,
+    "price_print": 131
+  },
+  {
+    "id": "book050",
+    "title": "Cybersecurity Book 50",
+    "author": "Dr. Verma",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519895-L.jpg",
+    "price_pdf": 55,
+    "price_print": 114
+  },
+  {
+    "id": "book051",
+    "title": "Cybersecurity Book 51",
+    "author": "Andrew Ng",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519837-L.jpg",
+    "price_pdf": 63,
+    "price_print": 140
+  },
+  {
+    "id": "book052",
+    "title": "Programming Book 52",
+    "author": "A. Kumar",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519893-L.jpg",
+    "price_pdf": 67,
+    "price_print": 142
+  },
+  {
+    "id": "book053",
+    "title": "Computer Science Book 53",
+    "author": "Robert L.",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519877-L.jpg",
+    "price_pdf": 55,
+    "price_print": 141
+  },
+  {
+    "id": "book054",
+    "title": "Programming Book 54",
+    "author": "S. Bhatt",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519879-L.jpg",
+    "price_pdf": 55,
+    "price_print": 173
+  },
+  {
+    "id": "book055",
+    "title": "Computer Science Book 55",
+    "author": "John Doe",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519889-L.jpg",
+    "price_pdf": 57,
+    "price_print": 164
+  },
+  {
+    "id": "book056",
+    "title": "Networking Book 56",
+    "author": "S. Bhatt",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519842-L.jpg",
+    "price_pdf": 65,
+    "price_print": 179
+  },
+  {
+    "id": "book057",
+    "title": "Networking Book 57",
+    "author": "Bruce Schneier",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519856-L.jpg",
+    "price_pdf": 50,
+    "price_print": 166
+  },
+  {
+    "id": "book058",
+    "title": "Computer Science Book 58",
+    "author": "Bruce Schneier",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519872-L.jpg",
+    "price_pdf": 70,
+    "price_print": 110
+  },
+  {
+    "id": "book059",
+    "title": "Computer Science Book 59",
+    "author": "Robert L.",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519860-L.jpg",
+    "price_pdf": 67,
+    "price_print": 101
+  },
+  {
+    "id": "book060",
+    "title": "Programming Book 60",
+    "author": "S. Bhatt",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519894-L.jpg",
+    "price_pdf": 62,
+    "price_print": 101
+  },
+  {
+    "id": "book061",
+    "title": "Mechanical Book 61",
+    "author": "Andrew Ng",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519875-L.jpg",
+    "price_pdf": 58,
+    "price_print": 155
+  },
+  {
+    "id": "book062",
+    "title": "Electronics Book 62",
+    "author": "Nina Roy",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519890-L.jpg",
+    "price_pdf": 47,
+    "price_print": 175
+  },
+  {
+    "id": "book063",
+    "title": "Mechanical Book 63",
+    "author": "Robert L.",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519884-L.jpg",
+    "price_pdf": 60,
+    "price_print": 143
+  },
+  {
+    "id": "book064",
+    "title": "Mechanical Book 64",
+    "author": "Jane Smith",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519858-L.jpg",
+    "price_pdf": 48,
+    "price_print": 179
+  },
+  {
+    "id": "book065",
+    "title": "Programming Book 65",
+    "author": "Dr. Verma",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519868-L.jpg",
+    "price_pdf": 49,
+    "price_print": 180
+  },
+  {
+    "id": "book066",
+    "title": "Mechanical Book 66",
+    "author": "John Doe",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519886-L.jpg",
+    "price_pdf": 43,
+    "price_print": 133
+  },
+  {
+    "id": "book067",
+    "title": "Cybersecurity Book 67",
+    "author": "Jane Smith",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519863-L.jpg",
+    "price_pdf": 45,
+    "price_print": 157
+  },
+  {
+    "id": "book068",
+    "title": "AI/ML Book 68",
+    "author": "Bruce Schneier",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519878-L.jpg",
+    "price_pdf": 63,
+    "price_print": 103
+  },
+  {
+    "id": "book069",
+    "title": "Electronics Book 69",
+    "author": "S. Bhatt",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519876-L.jpg",
+    "price_pdf": 49,
+    "price_print": 164
+  },
+  {
+    "id": "book070",
+    "title": "AI/ML Book 70",
+    "author": "A. Kumar",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519885-L.jpg",
+    "price_pdf": 65,
+    "price_print": 110
+  },
+  {
+    "id": "book071",
+    "title": "Computer Science Book 71",
+    "author": "Dr. Verma",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519857-L.jpg",
+    "price_pdf": 41,
+    "price_print": 131
+  },
+  {
+    "id": "book072",
+    "title": "AI/ML Book 72",
+    "author": "John Doe",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519894-L.jpg",
+    "price_pdf": 76,
+    "price_print": 144
+  },
+  {
+    "id": "book073",
+    "title": "Networking Book 73",
+    "author": "S. Bhatt",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519880-L.jpg",
+    "price_pdf": 55,
+    "price_print": 152
+  },
+  {
+    "id": "book074",
+    "title": "Mechanical Book 74",
+    "author": "Robert L.",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519847-L.jpg",
+    "price_pdf": 77,
+    "price_print": 117
+  },
+  {
+    "id": "book075",
+    "title": "Electronics Book 75",
+    "author": "A. Kumar",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519873-L.jpg",
+    "price_pdf": 59,
+    "price_print": 173
+  },
+  {
+    "id": "book076",
+    "title": "Programming Book 76",
+    "author": "Bruce Schneier",
+    "category": "Programming",
+    "cover": "https://covers.openlibrary.org/b/id/10519839-L.jpg",
+    "price_pdf": 44,
+    "price_print": 145
+  },
+  {
+    "id": "book077",
+    "title": "Mechanical Book 77",
+    "author": "Dr. Verma",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519864-L.jpg",
+    "price_pdf": 48,
+    "price_print": 155
+  },
+  {
+    "id": "book078",
+    "title": "Cybersecurity Book 78",
+    "author": "Andrew Ng",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519837-L.jpg",
+    "price_pdf": 47,
+    "price_print": 107
+  },
+  {
+    "id": "book079",
+    "title": "Cybersecurity Book 79",
+    "author": "A. Kumar",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519847-L.jpg",
+    "price_pdf": 62,
+    "price_print": 117
+  },
+  {
+    "id": "book080",
+    "title": "Cybersecurity Book 80",
+    "author": "Jane Smith",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519865-L.jpg",
+    "price_pdf": 48,
+    "price_print": 149
+  },
+  {
+    "id": "book081",
+    "title": "Electronics Book 81",
+    "author": "Andrew Ng",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519890-L.jpg",
+    "price_pdf": 40,
+    "price_print": 111
+  },
+  {
+    "id": "book082",
+    "title": "Computer Science Book 82",
+    "author": "Robert L.",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519889-L.jpg",
+    "price_pdf": 67,
+    "price_print": 137
+  },
+  {
+    "id": "book083",
+    "title": "Computer Science Book 83",
+    "author": "Jane Smith",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519860-L.jpg",
+    "price_pdf": 42,
+    "price_print": 146
+  },
+  {
+    "id": "book084",
+    "title": "Computer Science Book 84",
+    "author": "John Doe",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519858-L.jpg",
+    "price_pdf": 50,
+    "price_print": 146
+  },
+  {
+    "id": "book085",
+    "title": "Electronics Book 85",
+    "author": "A. Kumar",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519876-L.jpg",
+    "price_pdf": 60,
+    "price_print": 154
+  },
+  {
+    "id": "book086",
+    "title": "Networking Book 86",
+    "author": "Dr. Verma",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519841-L.jpg",
+    "price_pdf": 74,
+    "price_print": 133
+  },
+  {
+    "id": "book087",
+    "title": "Mechanical Book 87",
+    "author": "S. Bhatt",
+    "category": "Mechanical",
+    "cover": "https://covers.openlibrary.org/b/id/10519884-L.jpg",
+    "price_pdf": 43,
+    "price_print": 109
+  },
+  {
+    "id": "book088",
+    "title": "AI/ML Book 88",
+    "author": "Bruce Schneier",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519844-L.jpg",
+    "price_pdf": 58,
+    "price_print": 100
+  },
+  {
+    "id": "book089",
+    "title": "AI/ML Book 89",
+    "author": "Dr. Verma",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519862-L.jpg",
+    "price_pdf": 72,
+    "price_print": 125
+  },
+  {
+    "id": "book090",
+    "title": "Computer Science Book 90",
+    "author": "Bruce Schneier",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519840-L.jpg",
+    "price_pdf": 78,
+    "price_print": 154
+  },
+  {
+    "id": "book091",
+    "title": "Computer Science Book 91",
+    "author": "Andrew Ng",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519897-L.jpg",
+    "price_pdf": 48,
+    "price_print": 137
+  },
+  {
+    "id": "book092",
+    "title": "AI/ML Book 92",
+    "author": "S. Bhatt",
+    "category": "AI/ML",
+    "cover": "https://covers.openlibrary.org/b/id/10519879-L.jpg",
+    "price_pdf": 47,
+    "price_print": 151
+  },
+  {
+    "id": "book093",
+    "title": "Cybersecurity Book 93",
+    "author": "John Doe",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519890-L.jpg",
+    "price_pdf": 71,
+    "price_print": 136
+  },
+  {
+    "id": "book094",
+    "title": "Cybersecurity Book 94",
+    "author": "Bruce Schneier",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519856-L.jpg",
+    "price_pdf": 71,
+    "price_print": 102
+  },
+  {
+    "id": "book095",
+    "title": "Cybersecurity Book 95",
+    "author": "Dr. Verma",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519880-L.jpg",
+    "price_pdf": 45,
+    "price_print": 112
+  },
+  {
+    "id": "book096",
+    "title": "Computer Science Book 96",
+    "author": "Jane Smith",
+    "category": "Computer Science",
+    "cover": "https://covers.openlibrary.org/b/id/10519872-L.jpg",
+    "price_pdf": 56,
+    "price_print": 128
+  },
+  {
+    "id": "book097",
+    "title": "Cybersecurity Book 97",
+    "author": "Nina Roy",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519873-L.jpg",
+    "price_pdf": 72,
+    "price_print": 116
+  },
+  {
+    "id": "book098",
+    "title": "Electronics Book 98",
+    "author": "Dr. Verma",
+    "category": "Electronics",
+    "cover": "https://covers.openlibrary.org/b/id/10519894-L.jpg",
+    "price_pdf": 79,
+    "price_print": 167
+  },
+  {
+    "id": "book099",
+    "title": "Cybersecurity Book 99",
+    "author": "Bruce Schneier",
+    "category": "Cybersecurity",
+    "cover": "https://covers.openlibrary.org/b/id/10519871-L.jpg",
+    "price_pdf": 72,
+    "price_print": 120
+  },
+  {
+    "id": "book100",
+    "title": "Networking Book 100",
+    "author": "Lisa M.",
+    "category": "Networking",
+    "cover": "https://covers.openlibrary.org/b/id/10519856-L.jpg",
+    "price_pdf": 78,
+    "price_print": 150
+  }
+]
