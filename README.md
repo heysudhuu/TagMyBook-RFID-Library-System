@@ -39,12 +39,18 @@
 
 | Welcome Page | Register Page | Login Page |
 |--------------|---------------|-------------|
-| ![welcome](screenshots/welcome.png) | ![register](screenshots/register.png) | ![login](screenshots/login.png) |
+| ![welcome](WelcomePage.png) | ![register](registerpage.png) | ![login](loginpage.png) |
 
 | Student Dashboard | Book List View | Admin Dashboard |
 |-------------------|----------------|------------------|
-| ![student](screenshots/student_dashboard.png) | ![books](screenshots/books.png) | *Coming Soon* |
+| ![student](Studentpage.png) | ![books](StudentQRScan.png) 
 
+| Admin Dashboard |
+|![Admin](AdminPage.png)|
+|![Admin](AdminManageBook.png)|
+|![Admin](AdminRFIDManager.png)|
+|![Admin](AdminSetting.png)|
+|![Admin](AdminCheckOutCheckInPage.png)|
 ---
 
 ## 🔧 How to Run Locally
